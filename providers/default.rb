@@ -31,7 +31,7 @@ end
 
 def load_current_resource
     init_resource(new_resource)
-    @current_resource = Chef::Resource::CliGem.new(new_resource.name)
+    @current_resource = Chef::Resource::Cligem.new(new_resource.name)
     init_resource(@current_resource)
 end
 
