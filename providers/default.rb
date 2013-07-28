@@ -66,7 +66,7 @@ def install_gem
     end
     if new_resource.add_profile_d
         template "/etc/profile.d/#{new_resource.name}.sh" do
-            cookbook 'cli_gem'
+            cookbook 'cligem'
             owner "root"
             group "root"
             source "profile.d.sh.erb"
@@ -74,7 +74,7 @@ def install_gem
             variables( { :directory => new_resource.directory } )
         end
     end
-    node.set[:cli_gem][:install_dir][new_resource.name] = new_resource.directory
+    node.set[:cligem][:install_dir][new_resource.name] = new_resource.directory
 end
 
 def upgrade_gem
@@ -96,7 +96,7 @@ end
 
 def gemfile_template
     template "#{new_resource.directory}/Gemfile" do
-        cookbook 'cli_gem'
+        cookbook 'cligem'
         owner new_resource.owner
         group new_resource.group
         mode 0644
@@ -138,7 +138,7 @@ def bundle_config
         mode 0755
     end
     template "#{new_resource.directory}/.bundle/config" do
-        cookbook 'cli_gem'
+        cookbook 'cligem'
         owner new_resource.owner
         group new_resource.group
         mode 0644
