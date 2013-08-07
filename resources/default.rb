@@ -14,7 +14,8 @@ attribute :exec_only_gem_bins, :equal_to => [ true, false ], :default => true
 attribute :owner, :kind_of => String, :default => "root"
 attribute :group, :kind_of => String, :default => "root"
 attribute :add_profile_d, :equal_to => [ true, false ], :default => true
-attribute :rubygems_source, :kind_of => String, :default => 'https://rubygems.org'
+attribute :rubygems_source, :kind_of => String
+attribute :gems, :kind_of => Array
 
 attr_accessor :exists, :gemfile_lock
 

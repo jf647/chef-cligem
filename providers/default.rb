@@ -38,6 +38,10 @@ end
 def init_resource(r)
     r.directory      r.directory || "/opt/#{r.name}"
     r.gem_bins       r.gem_bins || [ r.name ]
+    r.rubygems_source r.rubygems_source || node[:cligem][:rubygems_source] || 'https://rubygems.org'
+    if r.gems.nil?
+        r.gems [ { :name => r.name, :version => r.version, :spec => r.gemspec } ]
+    end
     r.gemfile_lock = Pathname.new(r.directory) + 'Gemfile.lock'
     if r.gemfile_lock.exist?
         r.exists = true
@@ -103,9 +107,7 @@ def gemfile_template
         source "Gemfile.erb"
         variables( {
             :rubygems_source => new_resource.rubygems_source,
-            :gem => new_resource.name,
-            :version => new_resource.version,
-            :gemspec => new_resource.gemspec
+            :gems => new_resource.gems,
         } )
     end
 end
