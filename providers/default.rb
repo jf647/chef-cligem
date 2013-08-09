@@ -38,7 +38,13 @@ end
 def init_resource(r)
     r.directory      r.directory || "/opt/#{r.name}"
     r.gem_bins       r.gem_bins || [ r.name ]
-    r.rubygems_source r.rubygems_source || node[:cligem][:rubygems_source] || 'https://rubygems.org'
+    if ! r.rubygems_source.nil?
+        r.rubygems_source r.rubygems_source
+    elsif node.key?(:cligem) && ! node[:cligem][:rubygems_source].nil?
+        r.rubygems_source node[:cligem][:rubygems_source]
+    else
+        r.rubygems_source 'https://rubygems.org'
+    end
     if r.gems.nil?
         r.gems [ { :name => r.name, :version => r.version, :spec => r.gemspec } ]
     end
