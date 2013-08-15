@@ -1,3 +1,4 @@
+require 'debugger'
 require 'pathname'
 
 def whyrun_supported?
@@ -38,13 +39,8 @@ end
 def init_resource(r)
     r.directory      r.directory || "/opt/#{r.name}"
     r.gem_bins       r.gem_bins || [ r.name ]
-    if ! r.rubygems_source.nil?
-        r.rubygems_source r.rubygems_source
-    elsif node.key?(:cligem) && ! node[:cligem][:rubygems_source].nil?
-        r.rubygems_source node[:cligem][:rubygems_source]
-    else
-        r.rubygems_source 'https://rubygems.org'
-    end
+    debugger
+    r.rubygems_source r.rubygems_source || node[:cligem][:rubygems_source]
     if r.gems.nil?
         r.gems [ { :name => r.name, :version => r.version, :spec => r.gemspec } ]
     end
