@@ -1,4 +1,3 @@
-require 'debugger'
 require 'pathname'
 
 def whyrun_supported?
