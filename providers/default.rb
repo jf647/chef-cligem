@@ -38,7 +38,6 @@ end
 def init_resource(r)
     r.directory      r.directory || "/opt/#{r.name}"
     r.gem_bins       r.gem_bins || [ r.name ]
-    debugger
     r.rubygems_source r.rubygems_source || node[:cligem][:rubygems_source]
     if r.gems.nil?
         r.gems [ { :name => r.name, :version => r.version, :spec => r.gemspec } ]

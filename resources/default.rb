@@ -4,7 +4,7 @@ default_action :install
 attribute :name, :kind_of => String, :name_attribute => true
 attribute :version, :kind_of => String
 attribute :gemspec, :kind_of => String
-attribute :cookbook, :kind_of => String, :default => "cli_gem"
+attribute :cookbook, :kind_of => String, :default => "cligem"
 attribute :directory, :kind_of => String
 attribute :directory_mode, :kind_of => Integer, :default => 0755
 attribute :gem_bins, :kind_of => Array
